@@ -1,0 +1,10 @@
+version: '3'
+services:
+  camunda:
+    image: camunda/camunda-bpm-platform:run-latest
+    ports:
+      - "8080:8080"
+  ai-loan-worker:
+    build: ./ai-loan-worker
+    environment:
+      - OPENAI_API_KEY=your_api_key_here
