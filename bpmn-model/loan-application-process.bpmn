@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+id="Definition" targetNamespace="http://bpmn.io/schema/bpmn">
+  <process id="LoanApplicationProcess" name="Loan Application Process" isExecutable="true">
+    <startEvent id="StartEvent_1" name="Start"/>
+    <sequenceFlow id="Flow1" sourceRef="StartEvent_1" targetRef="SubmitApplication"/>
+    <userTask id="SubmitApplication" name="Submit Loan Application"/>
+    <sequenceFlow id="Flow2" sourceRef="SubmitApplication" targetRef="AIAnalyzeTask"/>
+    <serviceTask id="AIAnalyzeTask" name="AI Analyze Application" camunda:type="external" camunda:topic="ai-loan-analysis"/>
+    <sequenceFlow id="Flow3" sourceRef="AIAnalyzeTask" targetRef="HumanReview"/>
+    <userTask id="HumanReview" name="Loan Officer Review"/>
+    <sequenceFlow id="Flow4" sourceRef="HumanReview" targetRef="NotifyCustomer"/>
+    <serviceTask id="NotifyCustomer" name="Notify Customer"/>
+    <sequenceFlow id="Flow5" sourceRef="NotifyCustomer" targetRef="EndEvent"/>
+    <endEvent id="EndEvent" name="End"/>
+  </process>
+</definitions>
